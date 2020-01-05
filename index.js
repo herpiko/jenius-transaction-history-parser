@@ -13,7 +13,6 @@ pdf(dataBuffer).then(function(data) {
     let currentItem = {}
     let currentItemFieldNumber = 0;
     for (let i in lines) {
-      if (lines[i].trim().length < 1) continue;
       if (isOnItem) {
         switch (currentItemFieldNumber) {
           case 1:
@@ -25,9 +24,13 @@ pdf(dataBuffer).then(function(data) {
             currentItemFieldNumber++
             break; 
           case 3:
-            currentItem.entityDetail = lines[i].trim()
-            currentItemFieldNumber++
-            break; 
+						if (lines[i].trim().indexOf(' | ') < 0) {
+            	currentItem.entityDetail = lines[i].trim()
+            	currentItemFieldNumber++
+            	break; 
+            } else {
+            	currentItemFieldNumber++
+						}
           case 4:
             currentItem.transactionNumber = lines[i].trim().split(' | ')[0]
             currentItem.transactionType = lines[i].trim().split(' | ')[1]
@@ -42,6 +45,7 @@ pdf(dataBuffer).then(function(data) {
             currentItem.amount = lines[i].trim().split(' ')[1]
             isOnItem = false
             currentItemFieldNumber = 0
+						console.log(currentItem);
             report.push(currentItem);
             currentItem = {}
             break; 
