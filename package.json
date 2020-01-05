@@ -1,0 +1,15 @@
+{
+  "name": "jenius-history-parser",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Herpiko Dwi Aguno <herpiko@aguno.xyz>",
+  "license": "MIT",
+  "dependencies": {
+    "pdf-parse": "^1.1.1",
+    "pdf2json": "^1.1.8"
+  }
+}
