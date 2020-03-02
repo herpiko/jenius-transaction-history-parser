@@ -6,8 +6,8 @@ let dataBuffer = fs.readFileSync('./sample.pdf');
 pdf(dataBuffer).then(function(data) {
   let splitted = data.text.split('CategoryTransaction Type');
   splitted.splice(0, 1);
-  let text = splitted.join('CateoryTransaction Type');
-  let lines = text.split('\n');
+  let text = splitted.join('CategoryTransaction Type');
+  let lines = text.split("Disclaimer")[0].split('\n');
   let report = [];
   let isOnItem = false;
   let currentItem = {};
@@ -26,11 +26,9 @@ pdf(dataBuffer).then(function(data) {
         case 3:
           if (lines[i].trim().indexOf(' | ') < 0) {
             currentItem.entityDetail = lines[i].trim();
-            currentItemFieldNumber++;
-            break;
-          } else {
-            currentItemFieldNumber++;
           }
+          currentItemFieldNumber++;
+          break;
         case 4:
           currentItem.transactionNumber = lines[i].trim().split(' | ')[0];
           currentItem.transactionType = lines[i].trim().split(' | ')[1];
